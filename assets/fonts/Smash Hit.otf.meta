@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 790996b3673e08a449d27d0a2790703e
+timeCreated: 1492443308
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Smash Hit
+  fontNames:
+  - Smash Hit
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 76f6f9b4d25d2534abf66f8c7a070a57, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
