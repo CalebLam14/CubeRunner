@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour {
 
-    public Transform Player;
-    public float startingPositionZOffset = -10f;
+	public Transform Player;
+	public float startingPositionZOffset = -10f;
 	// Update is called once per frame
 	void Update () {
 		float playerPositionZ = Player.position.z;
