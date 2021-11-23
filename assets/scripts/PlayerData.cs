@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 [Serializable]
 class PlayerData
 {
-    public int HighScore;
+	public int HighScore;
 }

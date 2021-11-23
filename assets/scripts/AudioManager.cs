@@ -2,31 +2,24 @@
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioSource GameOverSound;
-    public AudioSource HighScoreSound;
+	public AudioSource GameOverSound;
+	public AudioSource HighScoreSound;
 
-    public void PlayGameOverSound(bool HighScoreExceeded)
-    {
-        if (HighScoreExceeded == true)
-        {
-            HighScoreSound.Play();
-        }
-        else
-        {
-            GameOverSound.Play();
-        }
-    }
+	public void PlayGameOverSound(bool HighScoreExceeded)
+	{
+		if (HighScoreExceeded == true)
+		{
+			HighScoreSound.Play();
+		}
+		else
+		{
+			GameOverSound.Play();
+		}
+	}
 
-    public void ChangeSoundPlayingState(bool PlayingPaused)
-    {
-        // SoundPaused = PlayingPaused;
-       /* if (PlayingState == true)
-        {
-            CurrentAudio.UnPause();
-        }
-        else
-        {
-            CurrentAudio.Pause();
-        }*/
-    }
+	public void ChangeSoundPlayingState(bool PlayingPaused)
+	{
+		// This does nothing for now because I don't
+		// have any music made yet.
+	}
 }

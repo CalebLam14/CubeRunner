@@ -2,10 +2,10 @@
 
 public class TitleScreenManager : MonoBehaviour {
 
-    public GameObject TitleButtons;
+	public GameObject TitleButtons;
 
-    private void Start()
-    {
-        TitleButtons.SetActive(true);
-    }
+	private void Start()
+	{
+		TitleButtons.SetActive(true);
+	}
 }
