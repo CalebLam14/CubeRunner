@@ -128,9 +128,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RigidBody: {fileID: 54399614276861190}
   ForwardForce: 2000
-  MaxForwardForce: 3500
+  MaxForwardForce: 4000
   HorMoveTime: 0.1
-  startPosX: 1
+  StartPosX: 1
+  MoveInterval: 2
+  MinX: -9
+  MaxX: 9
 --- !u!114 &114215071208872780
 MonoBehaviour:
   m_ObjectHideFlags: 0

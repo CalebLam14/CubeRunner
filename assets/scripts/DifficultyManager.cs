@@ -2,14 +2,18 @@
 
 public class DifficultyManager : MonoBehaviour {
 
-	public int StartTarget = 1000;
-	int Target;
-	public int TargetIncrement = 200;
+	public int AccelerationStartTarget = 1000;
+	public int AccelerationTargetIncrement = 200;
 	public float ForwardAccelerationRate = 100f;
-	// public float SidewaysAccelerationRate = 10f;
 	public float ObstacleSpaceIncrement = 3f;
+
+	public int ObstaclesIncreaseStartTarget = 400;
+	public int ObstaclesIncreaseTargetIncrement = 200;
 	public int MinObstaclesIncrement = 1;
 	public int MaxObstaclesIncrement = 1;
+
+	private int accelerationTarget;
+	private int obstaclesIncreaseTarget;
 
 	PlayerMovement PlayerMovement;
 	SpawnerManager SpawnerManager;
@@ -19,20 +23,25 @@ public class DifficultyManager : MonoBehaviour {
 		PlayerMovement = FindObjectOfType<PlayerMovement>();
 		SpawnerManager = FindObjectOfType<SpawnerManager>();
 
-		Target = StartTarget;
+		accelerationTarget = AccelerationStartTarget;
+		obstaclesIncreaseTarget = ObstaclesIncreaseStartTarget;
 	}
 
 	void Update () {
 		int CurrentScore = FindObjectOfType<Score>().GetScore();
 
-		if (CurrentScore == Target)
+		if (CurrentScore >= accelerationTarget)
 		{
-			Target += TargetIncrement;
+			accelerationTarget += AccelerationTargetIncrement;
 			PlayerMovement.ForwardForce += ForwardAccelerationRate;
-			// PlayerMovement.SidewaysForce += SidewaysAccelerationRate;
-			SpawnerManager.Space += ObstacleSpaceIncrement;
-			SpawnerManager.MinNumberOfObstacles+= MinObstaclesIncrement;
-			SpawnerManager.MaxNumberOfObstacles+= MaxObstaclesIncrement;
+			SpawnerManager.ZSpaceBetweenSpawnPoints += ObstacleSpaceIncrement;
+		}
+
+		if (CurrentScore >= obstaclesIncreaseTarget)
+        {
+			obstaclesIncreaseTarget += ObstaclesIncreaseTargetIncrement;
+			SpawnerManager.MinNumberOfObstacles += MinObstaclesIncrement;
+			SpawnerManager.MaxNumberOfObstacles += MaxObstaclesIncrement;
 		}
 	}
 }

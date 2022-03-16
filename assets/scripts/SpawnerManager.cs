@@ -36,8 +36,8 @@ public class SpawnerManager : MonoBehaviour {
 
 				for (int i = 0; i < Spawns.Length; i++)
 				{
-					int RandomNum = Random.Range(1, 150);
-					if (i == Spawns.Length && ObstaclesLeft != 0 || RandomNum >= 80 && ObstaclesLeft != 0)
+					int randomNum = Random.Range(1, 100);
+					if (i == Spawns.Length && obstaclesLeft != 0 || randomNum >= 50 && obstaclesLeft != 0)
 					{
 						Instantiate(Obstacle, Spawns[i].position, Quaternion.identity);
 						obstaclesLeft--;
