@@ -5,12 +5,12 @@ public class PlayerCollision : MonoBehaviour {
 	public PlayerMovement Movement;
 	public Rigidbody PlayerRigidBody;
 
-	void OnCollisionEnter(Collision CollisionInfo)
+	void OnCollisionEnter(Collision collisionInfo)
 	{
-		if (CollisionInfo.collider.tag == "Obstacle")
-		{ // Player hit an obstacle.
-			Movement.enabled = false;
-			FindObjectOfType<GameManager>().EndGame();
+		if (collisionInfo.collider.tag == "Obstacle")
+		{
+			// Player hit an obstacle.
+			StopGame();
 			PlayerRigidBody.constraints = RigidbodyConstraints.None;
 			PlayerRigidBody.AddTorque(new Vector3(Random.Range(10f, 20f), Random.Range(10f, 20f), Random.Range(10f, 20f)), ForceMode.Impulse);
 			PlayerRigidBody.AddForce(Random.Range(-10f, 10f), 50f, -50f, ForceMode.Impulse);
@@ -21,8 +21,13 @@ public class PlayerCollision : MonoBehaviour {
 	{
 		if (PlayerRigidBody.position.y < 0.75f)
 		{
-			FindObjectOfType<PlayerMovement>().enabled = false;
-			FindObjectOfType<GameManager>().EndGame();
+			StopGame();
 		}
+	}
+
+	private void StopGame()
+    {
+		Movement.enabled = false;
+		FindObjectOfType<GameManager>().EndGame();
 	}
 }

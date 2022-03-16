@@ -6,29 +6,28 @@ public class PauseManager : MonoBehaviour {
 	public GameObject PauseMenu;
 	public GameObject MainPauseMenu;
 	public GameObject ConfirmQuitMenu;
-	bool Paused = false;
+	private bool paused = false;
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			Paused = !Paused;
-			SetPause(Paused);
+			paused = !paused;
+			SetPause(paused);
 		}
 	}
 
-	public void SetPause(bool PausedState)
+	public void SetPause(bool pausedState)
 	{
-		FindObjectOfType<AudioManager>().ChangeSoundPlayingState(PausedState);
 		ConfirmQuitMenu.SetActive(false);
-		PauseMenu.SetActive(PausedState);
-		if (PausedState == true)
+		PauseMenu.SetActive(pausedState);
+		if (pausedState == true)
 		{
 			Time.timeScale = 0f;
 		}
 		else
 		{
 			Time.timeScale = 1f;
-			Paused = false;
+			paused = false;
 		}
 	}
 

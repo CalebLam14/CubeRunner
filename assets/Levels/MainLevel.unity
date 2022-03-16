@@ -1133,11 +1133,11 @@ MonoBehaviour:
   - {fileID: 368506411}
   - {fileID: 476669997}
   MinNumberOfObstacles: 0
-  MaxNumberOfObstacles: 5
+  MaxNumberOfObstacles: 3
   Obstacle: {fileID: 4490989344080770, guid: d0ffbda7f8a42fa40a2aada88f4592ef, type: 3}
   SpawnerArea: {fileID: 271832390}
   Player: {fileID: 1694856575}
-  Space: 30
+  ZSpaceBetweenSpawnPoints: 30
   StartSpawningPositionZ: 150
 --- !u!1 &325520066
 GameObject:
@@ -2003,10 +2003,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 54399614276861190, guid: f8c724c0486e67e4c84cf097102653a7,
+    - target: {fileID: 114947944025227186, guid: f8c724c0486e67e4c84cf097102653a7,
         type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
+      propertyPath: HorMoveTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8c724c0486e67e4c84cf097102653a7, type: 3}
@@ -4308,9 +4308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d13dcff99ce76468504ace725fdf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartTarget: 500
-  TargetIncrement: 500
-  ForwardAccelerationRate: 100
+  StartTarget: 250
+  TargetIncrement: 250
+  ForwardAccelerationRate: 250
   ObstacleSpaceIncrement: 0
   MinObstaclesIncrement: 1
   MaxObstaclesIncrement: 1

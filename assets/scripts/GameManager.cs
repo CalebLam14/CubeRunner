@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 public class GameManager : MonoBehaviour {
 
@@ -22,9 +20,9 @@ public class GameManager : MonoBehaviour {
 		GameState = State.InProgress;
 	}
 
-	public void EndGame ()
+	public void EndGame()
 	{
-		if (GameHasEnded == false)
+		if (!GameHasEnded)
 		{
 			GameHasEnded = true;
 			GameState = State.GameOver;
@@ -41,12 +39,12 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void ResetLevel ()
+	public void ResetLevel()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
-	public void BackToMainMenu ()
+	public void BackToMainMenu()
 	{
 		/*int CurrentScore = FindObjectOfType<Score>().GetScore();
 

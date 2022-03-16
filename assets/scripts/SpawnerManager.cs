@@ -3,29 +3,36 @@ using UnityEngine;
 public class SpawnerManager : MonoBehaviour {
 
 	public Transform[] Spawns;
+
 	public int MinNumberOfObstacles;
 	public int MaxNumberOfObstacles;
+
 	public Transform Obstacle;
 	public Transform SpawnerArea;
 	public Transform Player;
-	public float Space = 30f;
+	public float ZSpaceBetweenSpawnPoints = 30f;
 	public float StartSpawningPositionZ = 100f;
 
 	private void Start()
 	{
-		MinNumberOfObstacles = Mathf.Clamp(MinNumberOfObstacles, 0, 5);
-		MaxNumberOfObstacles = Mathf.Clamp(MaxNumberOfObstacles, 3, 7);
+		// Initialize the spawner
 		SpawnerArea.position = new Vector3(0, 0, StartSpawningPositionZ);
 	}
 
 	private void Update()
 	{
-		#region Spawn Blocks
-		if (FindObjectOfType<GameManager>().GameState == GameManager.State.InProgress)
+		// Constrain max. and min. number of obstacles
+		MaxNumberOfObstacles = Mathf.Clamp(MaxNumberOfObstacles, MinNumberOfObstacles, Spawns.Length);
+		MinNumberOfObstacles = Mathf.Clamp(MinNumberOfObstacles, 0, MaxNumberOfObstacles);
+
+        #region Spawn Blocks
+        // Obstacles only continue to spawn if the game's state is InProgress in order
+        // to save memory
+        if (FindObjectOfType<GameManager>().GameState == GameManager.State.InProgress)
 		{
 			if (SpawnerArea.position.z - Player.position.z <= StartSpawningPositionZ)
 			{
-				int ObstaclesLeft = Random.Range(MinNumberOfObstacles, MaxNumberOfObstacles);
+				int obstaclesLeft = Random.Range(MinNumberOfObstacles, MaxNumberOfObstacles);
 
 				for (int i = 0; i < Spawns.Length; i++)
 				{
@@ -33,15 +40,13 @@ public class SpawnerManager : MonoBehaviour {
 					if (i == Spawns.Length && ObstaclesLeft != 0 || RandomNum >= 80 && ObstaclesLeft != 0)
 					{
 						Instantiate(Obstacle, Spawns[i].position, Quaternion.identity);
-						ObstaclesLeft--;
+						obstaclesLeft--;
 					}
 
 				}
-				SpawnerArea.position += new Vector3(0, 0, Space);
+				SpawnerArea.position += new Vector3(0, 0, ZSpaceBetweenSpawnPoints);
 			}
 		}
 		#endregion
-
-
 	}
 }

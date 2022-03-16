@@ -6,11 +6,19 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour {
 
 	public Transform player;
-	public Text scoreText;
+	public Text ScoreText;
 	public Text BestScoreText;
 	public GameManager GameManager;
-	int CurrentScore;
-	int HighScore;
+	private int currentScore;
+	private int highScore;
+
+	private void Start()
+	{
+		LoadHighScore();
+		BestScoreText.text = "Best: " + highScore;
+		startTimestamp = Time.timeSinceLevelLoad;
+	}
+
 
 	public void LoadHighScore()
 	{
@@ -22,47 +30,25 @@ public class Score : MonoBehaviour {
 			BinaryFormatter bf = new BinaryFormatter();
 			PlayerData data = (PlayerData)bf.Deserialize(file);
 
-			HighScore = data.HighScore;
+			highScore = data.HighScore;
 		}
 	}
 
 	public void SaveNewHighScore()
 	{
-		HighScore = CurrentScore;
+		highScore = currentScore;
 
 		using FileStream file = File.Open(Application.persistentDataPath + "/save.dat", FileMode.OpenOrCreate);
 		BinaryFormatter bf = new BinaryFormatter();
 		PlayerData data = new PlayerData();
-		data.HighScore = HighScore;
+		data.HighScore = highScore;
 
 		bf.Serialize(file, data);
 		Debug.Log("Player data saved!");
 	}
 
-	private void Start()
+	public int GetScore()
 	{
-		LoadHighScore();
-		BestScoreText.text = "Best: " + HighScore;
-	}
-
-	private void Update()
-	{
-		if (GameManager.GameState == GameManager.State.InProgress)
-		{
-			CurrentScore = Mathf.RoundToInt(player.position.z * 0.6f);
-			scoreText.text = CurrentScore.ToString("0");
-
-			if (CurrentScore > HighScore)
-			{
-				GameManager.SetNewRecord();
-				BestScoreText.color = new Color(0f/255f, 180f/255f, 15f/255f, 0.8f);
-				BestScoreText.text = "Best: " + CurrentScore.ToString("0");
-			}
-		}    
-	}
-
-	public int GetScore ()
-	{
-		return CurrentScore;
+		return currentScore;
 	}
 }
