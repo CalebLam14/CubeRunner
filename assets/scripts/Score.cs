@@ -9,8 +9,10 @@ public class Score : MonoBehaviour {
 	public Text ScoreText;
 	public Text BestScoreText;
 	public GameManager GameManager;
+	public float ScorePerSecond;
 	private int currentScore;
 	private int highScore;
+	private float startTimestamp;
 
 	private void Start()
 	{
@@ -19,6 +21,22 @@ public class Score : MonoBehaviour {
 		startTimestamp = Time.timeSinceLevelLoad;
 	}
 
+	private void Update()
+	{
+		if (GameManager.GameState == GameManager.State.InProgress)
+		{
+			float timeElapsed = Time.timeSinceLevelLoad - startTimestamp;
+			currentScore = Mathf.RoundToInt(timeElapsed * ScorePerSecond);
+			ScoreText.text = currentScore.ToString("0");
+
+			if (currentScore > highScore)
+			{
+				GameManager.SetNewRecord();
+				BestScoreText.color = new Color(0f/255f, 180f/255f, 15f/255f, 0.8f);
+				BestScoreText.text = "Best: " + currentScore.ToString("0");
+			}
+		}    
+	}
 
 	public void LoadHighScore()
 	{
